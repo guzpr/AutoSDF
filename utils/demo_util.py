@@ -102,7 +102,7 @@ def get_shape_comp_model(opt):
     
     # load tf stuff
     opt.model='rand_tf'
-    opt.tf_cfg='configs/rand_tf_snet_code.yaml'
+    opt.tf_cfg='../configs/rand_tf_snet_code.yaml'
     opt.ckpt = 'saved_ckpt/rand_tf-snet_code-all-LR1e-4-clean-epoch200.pth'
     
     # load vq stuff
