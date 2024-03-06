@@ -1,6 +1,9 @@
 import socket
 import getpass
 
+dataroot = ''
+logroot = ''
+
 username = getpass.getuser()
 
 hostname = socket.gethostname()
