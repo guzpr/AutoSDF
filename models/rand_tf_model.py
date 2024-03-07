@@ -181,8 +181,9 @@ class RandTransformerModel(BaseModel):
             else:
                 self.gen_order = gen_order
 
-        print(f"self.grid_table device: {self.grid_table.device}")
-        print(f"self.gen_order device: {self.gen_order.device}")
+        self.grid_table = self.grid_table.to(self.device)
+        self.gen_order = self.gen_order.to(self.device)
+
         x_idx_seq_shuf = self.x_idx_seq[self.gen_order]
         x_seq_shuffled = torch.cat([torch.full((1, bs), fill_value=self.sos, dtype=torch.long, device=self.device), x_idx_seq_shuf], dim=0)  # T+1
         pos_shuffled = torch.cat([self.grid_table[:1], self.grid_table[1:][self.gen_order]], dim=0)   # T+1, <sos> should always at start.
