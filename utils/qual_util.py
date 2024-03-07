@@ -252,7 +252,7 @@ def get_img_prob(resnet2vq_model, test_data, opt=None):
        
 def load_resnet2vq_model(
         opt,
-        resnet2vq_ckpt='saved_ckpt/resnet2vq-pix3d_img-all-LR1e-4-cleanCode-pix3dMode-noBG-epoch40.pth',
+        resnet2vq_ckpt='/content/drive/My Drive/resnet2vq-pix3d_img-all-LR1e-4-cleanCode-pix3dMode-noBG-epoch40.pth',
         ):
     from models.networks.resnet2vq_net import ResNet2VQ
     
