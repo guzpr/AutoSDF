@@ -15,7 +15,7 @@ class ResNet2VQ(nn.Module):
         super(ResNet2VQ, self).__init__()
         
         self.resnet = resnet18(pretrained=True).to(opt.device)
-
+        self.device = opt.device
         ntoken = 512
 
         if opt.vq_note == 'default':
