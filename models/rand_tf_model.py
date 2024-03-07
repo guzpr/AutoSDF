@@ -45,7 +45,7 @@ class RandTransformerModel(BaseModel):
 
         # init tf model
         self.tf = RandTransformer(tf_conf, vq_conf=vq_conf)
-
+        self.device = opt.device
         # init vqvae for decoding shapes
         mparam = vq_conf.model.params
         n_embed = mparam.n_embed
@@ -144,9 +144,9 @@ class RandTransformerModel(BaseModel):
     def get_dummy_input(self, bs=1):
         
         ret = {}
-        ret['sdf'] = torch.zeros(bs, 1, 64, 64, 64)#.to(device)
-        ret['idx'] = torch.zeros(bs, self.grid_size, self.grid_size, self.grid_size).long()#.to(device)
-        ret['z_q'] = torch.zeros(bs, 256, self.grid_size, self.grid_size, self.grid_size)#.to(device)
+        ret['sdf'] = torch.zeros(bs, 1, 64, 64, 64).to(self.device)
+        ret['idx'] = torch.zeros(bs, self.grid_size, self.grid_size, self.grid_size).long().to(self.device)
+        ret['z_q'] = torch.zeros(bs, 256, self.grid_size, self.grid_size, self.grid_size).to(self.device)
 
         return ret
 
