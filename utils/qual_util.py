@@ -238,7 +238,7 @@ def preprocess_img(img_path, img_mask_path, dataset_mode='pix3d'):
    
 # copy from quant/test_iou.py
 def get_img_prob(resnet2vq_model, test_data, opt=None):
-    img = test_data['img'].cuda()
+    img = test_data['img'].to(resnet2vq_model.device)
     
     img_logits = resnet2vq_model(img) # bs c d h w
 

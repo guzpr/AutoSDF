@@ -152,14 +152,14 @@ class RandTransformerModel(BaseModel):
 
     def set_input(self, input=None, gen_order=None):
         
-        self.x = input['sdf']
-        self.x_idx = input['idx']
-        self.z_q = input['z_q']
+        self.x = input['sdf'].to(self.device)
+        self.x_idx = input['idx'].to(self.device)
+        self.z_q = input['z_q'].to(self.device)
         bs, dz, hz, wz = self.x_idx.shape
         self.z_shape = self.z_q.shape
 
         if self.opt.dataset_mode in ['pix3d_img', 'snet_img']:
-            self.gt_vox = input['gt_vox']
+            self.gt_vox = input['gt_vox'].to(self.device)
 
         self.x_idx_seq = rearrange(self.x_idx, 'bs dz hz wz -> (dz hz wz) bs').contiguous() # to (T, B)
         self.x_idx = self.x_idx_seq.clone()
