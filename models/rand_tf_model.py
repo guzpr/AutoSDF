@@ -155,8 +155,8 @@ class RandTransformerModel(BaseModel):
         self.x = input['sdf'].to(self.device)
         self.x_idx = input['idx'].to(self.device)
         self.z_q = input['z_q'].to(self.device)
-        bs, dz, hz, wz = self.x_idx.shape.to(self.device)
-        self.z_shape = self.z_q.shape.to(self.device)
+        bs, dz, hz, wz = self.x_idx.shape
+        self.z_shape = self.z_q.shape
 
         if self.opt.dataset_mode in ['pix3d_img', 'snet_img']:
             self.gt_vox = input['gt_vox'].to(self.device)
@@ -182,7 +182,7 @@ class RandTransformerModel(BaseModel):
                 self.gen_order = gen_order
 
         x_idx_seq_shuf = self.x_idx_seq[self.gen_order]
-        x_seq_shuffled = torch.cat([torch.LongTensor(1, bs).fill_(self.sos), x_idx_seq_shuf], dim=0)  # T+1
+        x_seq_shuffled = torch.cat([torch.full((1, bs), fill_value=self.sos, dtype=torch.long, device=self.device), x_idx_seq_shuf], dim=0)  # T+1
         pos_shuffled = torch.cat([self.grid_table[:1], self.grid_table[1:][self.gen_order]], dim=0)   # T+1, <sos> should always at start.
 
         self.inp = x_seq_shuffled[:-1].clone()
