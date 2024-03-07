@@ -155,8 +155,8 @@ class RandTransformerModel(BaseModel):
         self.x = input['sdf'].to(self.device)
         self.x_idx = input['idx'].to(self.device)
         self.z_q = input['z_q'].to(self.device)
-        bs, dz, hz, wz = self.x_idx.shape
-        self.z_shape = self.z_q.shape
+        bs, dz, hz, wz = self.x_idx.shape.to(self.device)
+        self.z_shape = self.z_q.shape.to(self.device)
 
         if self.opt.dataset_mode in ['pix3d_img', 'snet_img']:
             self.gt_vox = input['gt_vox'].to(self.device)
