@@ -44,7 +44,7 @@ fi
 
 
 # CUDA_VISIBLE_DEVICES=${gpuid} python train.py --name ${name} --gpu_ids ${gpuid} --lr ${lr} --batch_size ${batch_size} \
-python train.py --name ${name} --gpu_ids ${gpuid} --lr ${lr} --batch_size ${batch_size} \
+echo python train.py --name ${name} --gpu_ids ${gpuid} --lr ${lr} --batch_size ${batch_size} \
                 --model ${model} --vq_cfg ${vq_cfg} \
                 --nepochs ${nepochs} --nepochs_decay ${nepochs_decay} \
                 --dataset_mode ${dataset_mode} --cat ${cat} --trunc_thres ${trunc_thres} --max_dataset_size ${max_dataset_size} \
